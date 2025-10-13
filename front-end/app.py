@@ -1,19 +1,18 @@
 import streamlit as st
+import requests as rq
 
-def main():
-    st.markdown(
-        """
-        <style>
-        html, body, .stApp {
-            background-color: #F07E69 !important;
-            height: 100%;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+API_URL = "http://http://127.0.0.1:8000/"
 
-    st.title("Pesquisa de Filmes 🎬")
+st.set_page_config(page_title="Gerenciador de filmes", page_icon="💎")
 
-if __name__ == "__main__":
-    main()
+#menu lateral = sidebar
+menu = st.sidebar.radio("Navegação", ["Catálogo"])
+
+
+if menu == "Catálogo":
+    st.subheader("Todos os filmes")
+    response = rq.get(f"{API_URL}/filmes")
+    if response.status_code == 200:
+        filmes = response.json().get("filmes", [])
+        if filmes:
+            
