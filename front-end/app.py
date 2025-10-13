@@ -1,7 +1,7 @@
 import streamlit as st
 import requests as rq
 
-API_URL = "http://http://127.0.0.1:8000/"
+API_URL = "http://127.0.0.1:8000"
 
 st.set_page_config(page_title="Gerenciador de filmes", page_icon="💎")
 
@@ -15,4 +15,10 @@ if menu == "Catálogo":
     if response.status_code == 200:
         filmes = response.json().get("filmes", [])
         if filmes:
-            
+            for filme in filmes:
+                st.write(f" **{filme['titulo']}** {filme['ano']} - {filme['genero']} - {filme['avaliacao']}")
+        else:
+            st.info("Nenhum filme encontrado")
+
+    else:
+        st.error("Erro ao conectar API")
