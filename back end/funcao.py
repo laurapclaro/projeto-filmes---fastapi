@@ -72,7 +72,7 @@ def atualizar_movies(id_movie, nova_avaliacão):
     if conexao:
         try: 
             cursor.execute(
-                "UPDATE movies SET avaliacão = %s WHERE id = %s",
+                "UPDATE movies SET avaliacao = %s WHERE id = %s",
                 (nova_avaliacão, id_movie)
                 )
             conexao.commit()
@@ -127,9 +127,9 @@ def buscar_movies(id_filme):
     if conexao:
         try: 
             cursor.execute(
-                "SELECT * FROM movies WHERE id = %s", {id_filme}
+                "SELECT * FROM movies WHERE id = %s", (id_filme,)
             )
-            return cursor.fetchall()
+            return cursor.fetchone()
         except Exception as erro:
             print(f"Erro ao listar {erro}")
             return []

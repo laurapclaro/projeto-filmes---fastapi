@@ -6,7 +6,7 @@ API_URL = "http://127.0.0.1:8000"
 st.set_page_config(page_title="Gerenciador de filmes", page_icon="💎")
 
 #menu lateral = sidebar
-menu = st.sidebar.radio("Navegação", ["Catálogo", "Inserir filmes", "Atualizar filme"])
+menu = st.sidebar.radio("Navegação", ["Catálogo", "Inserir filmes", "Atualizar filme", "Deletar filme"])
 
 
 if menu == "Catálogo":
@@ -44,15 +44,23 @@ elif menu == "Atualizar filme":
     nova_avaliacao = st.number_input("Nova avaliação", min_value=0, max_value=10)
     if st.button("Atualizar"):
         params = {"nova_atualizacao": nova_avaliacao}
-        response = rq.put(f"{API_URL}/filmes/{id_filme}", params=params)
+        response = rq.put(f"{API_URL}/filmes/{id_movies}", params=params)
         if response.status_code == 200:
             data = response.json()
             if "erro" in data:
-                st.warning(data["error"])
+                st.warning(data["error"])         
             else:
                 st.success("Obra atualizada com sucesso")
         else:
             st.error("Erro ao atualizar filme")
+
+elif menu == "Deletar filme":
+    st.subheader("Deletar filme ❌")
+    identificacao = st.number_input("ID do filme e deletar")
+
+
+
+
 
  
 
