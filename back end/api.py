@@ -25,7 +25,7 @@ def catalogo():
        lista.append( { "id": filme[0], 
                     "titulo": filme[1], 
                     "genero": filme[2],
-                    "ano lançamento": filme[3],
+                    "ano": filme[3],
                      "avaliacao": filme[4] 
                      })
     return{"filmes": lista }
