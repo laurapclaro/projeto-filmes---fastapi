@@ -40,10 +40,7 @@ def criar_filme(titulo, genero, ano, avaliacao):
         finally:
             cursor.close()
             conexao.close()
-
-
-
-criar_filme("Avatar", "Ação", 2009, 10.0)
+conectar()
 
 #-----------
 
